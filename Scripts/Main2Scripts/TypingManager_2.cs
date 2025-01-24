@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-//[Serializable]
-////public class Question
-//{
-//    public string japanese;
-//    public string roman;
-//}
+[Serializable]
+public class Question
+{
+    public string japanese;
+    public string roman;
+}
 
-public class TypingManager : MonoBehaviour
+public class TypingManager_2 : MonoBehaviour
 {
     [SerializeField] private Question[] questions;
 
