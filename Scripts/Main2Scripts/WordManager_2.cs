@@ -28,7 +28,17 @@ public class WordManager_2 : MonoBehaviour
         { "やま", "yama" },
         { "かわ", "kawa" },
         { "ひと", "hito" },
-       
+        { "ほん","hon" },
+        { "いぬ", "inu" },
+        { "ねこ", "neko" },
+        { "くるま","kuruma" },
+        {"いえ","ie" },
+        { "がっこう", "gakkou" },
+        { "しごと",  "shigoto" },
+        { "ともだち",  "tomodachi" },
+        { "たべもの", "tabemono" },
+        { "みず", "mizu" },
+
     };
 
     void Start()

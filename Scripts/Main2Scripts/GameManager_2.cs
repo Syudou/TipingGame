@@ -75,7 +75,7 @@ public class GameManager_2 : MonoBehaviour
         ProjectileController_2.OnProjectileHitWord += HandleProjectileHitWord;
         PlayerController_2.OnPlayerTakeDamage += HandlePlayerTakeDamage;
 
-        
+
     }
 
     
@@ -86,22 +86,26 @@ public class GameManager_2 : MonoBehaviour
         PlayerController_2.OnPlayerTakeDamage -= HandlePlayerTakeDamage;
     }
 
-    // イベントが発行されたときに呼び出される
     private void HandleProjectileHitWord(WordController_2 word, ProjectileController_2 projectile)
     {
+        if (isGameOver) return;
+
         string wordText = word.textDisplay.text;
         Debug.Log($"Word '{wordText}' was hit by a projectile!");
 
-        if (isGameOver) return;
-
         // スコアを加算
-        score += 10; // 倒すごとに10ポイント加算
+        score += 10;
         UpdateScoreText();
 
         // 効果音を再生
         if (audioSource != null && hitSound != null)
         {
+            Debug.Log("ひっと！効果音を再生します。");
             audioSource.PlayOneShot(hitSound);
+        }
+        else
+        {
+            Debug.LogError("AudioSource または hitSound が null です。");
         }
     }
 
@@ -183,5 +187,34 @@ public class GameManager_2 : MonoBehaviour
     {
         // タイトルシーンをロードする（"TitleScene"がシーン名の場合）
         SceneManager.LoadScene("TitleScene");
+    }
+
+    public void IncreaseScore(int amount)
+    {
+        score += amount;
+        UpdateScoreText();
+    }
+
+    // 単語と弾の衝突を処理する関数
+    public void OnWordHit(WordController_2 hitWord)
+    {
+        if (isGameOver) return;
+
+        Debug.Log($"Word '{hitWord.textDisplay.text}' was hit!");
+
+        // スコアを加算
+        //score += 10;
+        //UpdateScoreText();
+
+        // 効果音を再生
+        if (audioSource != null && hitSound != null)
+        {
+            Debug.Log("効果音を再生します");
+            audioSource.PlayOneShot(hitSound);
+        }
+        else
+        {
+            Debug.LogError("AudioSource または hitSound が null です。");
+        }
     }
 }

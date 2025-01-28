@@ -8,6 +8,7 @@ public class AudioManager_2 : MonoBehaviour
     public AudioSource seAudioSource;  // SE用のAudioSource
     public AudioClip bgmClip;          // BGMの音源
     public AudioClip gameOverClip;     // ゲームオーバー時のSE
+    public AudioClip hitSound; // 効果音
 
     // Start is called before the first frame update
     void Start()
@@ -22,5 +23,11 @@ public class AudioManager_2 : MonoBehaviour
     {
         // ゲームオーバー時のSEを再生
         seAudioSource.PlayOneShot(gameOverClip);
+    }
+    public void PlayhitSE()
+    {
+       
+       seAudioSource.PlayOneShot(hitSound);
+        
     }
 }

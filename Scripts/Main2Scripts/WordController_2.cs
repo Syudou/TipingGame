@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using static UnityEngine.GraphicsBuffer;
 
 public class WordController_2 : MonoBehaviour
 {
@@ -11,8 +12,12 @@ public class WordController_2 : MonoBehaviour
 
     private Vector3 targetPosition; // プレイヤーの位置（目標地点）
     private float speed; // 移動速度
+                         
+    public string character;// 文字を保持するフィールド
 
     private Renderer wordRenderer;
+
+    
 
     // 初期化（日本語とローマ字のセット）
     public void Initialize(string japaneseWord, string romaji)
@@ -49,20 +54,19 @@ public class WordController_2 : MonoBehaviour
     private void ProcessKeyboardInput()
     {
         // キー入力を監視（ローマ字）
-        foreach (char c in "abcdefghijklmnopqrstuvwxyz") // ローマ字の英小文字
+        foreach (char c in "abcdefghijklmnopqrstuvwxyz")
         {
-            if (Input.GetKeyDown(c.ToString())) // 入力されたキーがあれば
+            if (Input.GetKeyDown(c.ToString()))
             {
-                bool isCorrect = ProcessInput(c); // 入力処理
-                if (isCorrect)
+                bool isComplete = ProcessInput(c);
+                if (isComplete)
                 {
-                    Debug.Log($"正しい入力: {currentInput}"); // コンソールに表示
-                    wordRenderer.material.color = Color.green; // 単語を緑色に変更（正しい入力）
-                }
-                else
-                {
-                    Debug.Log($"入力中: {currentInput}"); // コンソールに表示
-                    wordRenderer.material.color = Color.yellow; // 単語を黄色に変更（入力中）
+                    // 入力完了時に弾を発射
+                    TypingController_2 typingController = FindObjectOfType<TypingController_2>();
+                    if (typingController != null)
+                    {
+                        typingController.Shoot(this); // 弾を発射
+                    }
                 }
             }
         }
@@ -75,20 +79,42 @@ public class WordController_2 : MonoBehaviour
 
         if (romajiWord.StartsWith(currentInput))
         {
-            // 入力が正しい場合
             if (romajiWord == currentInput)
             {
-                Destroy(gameObject); // 正解したら単語を削除
-                return true; // 正しい入力として処理
+                // 正しい入力が完了
+                return true;
             }
-            return false; // 入力中
+            return false;
         }
         else
         {
-            // 入力が間違っている場合
-            currentInput = ""; // 入力をリセット
-            wordRenderer.material.color = Color.red; // 単語を赤色に変更（間違った入力）
+            // 入力が間違った場合リセット
+            currentInput = "";
+            wordRenderer.material.color = Color.red; // 赤色で誤入力を表示
             return false;
         }
     }
+
+    //void OnCollisionEnter(Collision collision)
+    //{
+
+
+    //    WordController_2 hitWord2 = collision.gameObject.GetComponent<WordController_2>();
+
+    //    if (hitWord2 != null && hitWord2 == romaji)
+    //    {
+    //        Debug.Log($"Target hit: {hitWord2.textDisplay.text}");
+
+    //        // GameManager_2 に接触情報を送信
+    //        GameManager_2 gameManager = FindObjectOfType<GameManager_2>();
+    //        if (gameManager != null)
+    //        {
+    //            gameManager.OnWordHit(hitWord2); // 接触した単語を渡す
+    //        }
+
+    //        // 単語と弾を破壊
+    //        Destroy(hitWord2.gameObject);
+    //        Destroy(gameObject);
+    //    }
+    //}
 }

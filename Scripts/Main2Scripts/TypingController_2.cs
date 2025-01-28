@@ -59,9 +59,9 @@ public class TypingController_2 : MonoBehaviour
         }
     }
 
-    void Shoot(WordController_2 targetWord)
+    public void Shoot(WordController_2 targetWord)
     {
-        // ’e‚ğ¶¬
+        // ’e‚ğ¶¬‚µƒ^[ƒQƒbƒg‚ğİ’è
         GameObject projectile = Instantiate(projectilePrefab, shootPoint.position, Quaternion.identity);
         projectile.GetComponent<ProjectileController_2>().Initialize(targetWord);
     }

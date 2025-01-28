@@ -1697,6 +1697,7 @@ MonoBehaviour:
   seAudioSource: {fileID: 1282894782}
   bgmClip: {fileID: 8300000, guid: 00d53f1d6caf5a449845a342e8c38bc4, type: 3}
   gameOverClip: {fileID: 8300000, guid: 24266cbba51e1f54d81156f20e2eceeb, type: 3}
+  hitSound: {fileID: 8300000, guid: 15d5344952efc7145a51f0ece6688032, type: 3}
 --- !u!4 &1282894785
 Transform:
   m_ObjectHideFlags: 0
@@ -2473,7 +2474,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
