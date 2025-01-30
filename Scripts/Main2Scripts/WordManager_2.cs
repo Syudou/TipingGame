@@ -38,7 +38,57 @@ public class WordManager_2 : MonoBehaviour
         { "ともだち",  "tomodachi" },
         { "たべもの", "tabemono" },
         { "みず", "mizu" },
-
+        { "ひかり", "hikari" },
+        { "うさぎ", "usagi" },
+　　　　{ "しか", "shika" },
+        { "かめ", "kame" },
+        { "へび", "hebi" },
+        { "おに", "oni" },
+        { "まほう", "mahou" },
+        { "ひこうき", "hikouki" },
+        { "くるま", "kuruma" },
+        { "でんしゃ", "densha" },
+        { "ふね", "fune" },
+        { "みち", "michi" },
+        { "たび", "tabi" },
+        { "きぼう", "kibou" },
+        { "つばさ", "tsubasa" },
+        { "たまご", "tamago" },
+        { "りんご", "ringo" },
+        { "みかん", "mikan" },
+        { "ぶどう", "budou" },
+        { "なし", "nashi" },
+        { "もも", "momo" },
+        { "すいか", "suika" },
+        { "かお", "kao" },
+        { "めがね", "megane" },
+        { "ぼうし", "boushi" },
+        { "かばん", "kaban" },
+        { "くつ", "kutsu" },
+        { "はし", "hashi" },
+        { "てがみ", "tegami" },
+        { "えんぴつ", "enpitsu" },
+        { "ほん", "hon" },
+        { "ざっし", "zasshi" },
+        { "しんぶん", "shinbun" },
+        { "みせ", "mise" },
+        { "はた", "hata" },
+        { "つの", "tsuno" },
+        { "つめ", "tsume" },
+        { "はね", "hane" },
+        { "いえ", "ie" },
+        { "まど", "mado" },
+        { "とびら", "tobira" },
+        { "きん", "kin" },
+        { "ぎん", "gin" },
+        { "たから", "takara" },
+        { "こえ", "koe" },
+        { "おんがく", "ongaku" },
+        { "え", "e" },
+        { "うた", "uta" },
+        { "はしる", "hashiru" },
+        { "あるく", "aruku" },
+        { "おどる", "odoru" }
     };
 
     void Start()
@@ -111,5 +161,22 @@ public class WordManager_2 : MonoBehaviour
             }
         }
         spawnedWords.Clear(); // リストをクリア
+    }
+
+    public TextMeshProUGUI typedTextUI; // 画面に表示する TextMeshPro
+    private string typedText = ""; // プレイヤーの入力を保持
+
+    // プレイヤーの入力を更新し、画面に表示する
+    public void UpdateTypedText(string input)
+    {
+        typedText += input; // 文字を追加
+        typedTextUI.text = typedText; // UIに反映
+    }
+
+    // 入力をリセット（単語が確定した時など）
+    public void ResetTypedText()
+    {
+        typedText = "";
+        typedTextUI.text = "";
     }
 }

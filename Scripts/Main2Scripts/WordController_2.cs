@@ -17,7 +17,7 @@ public class WordController_2 : MonoBehaviour
 
     private Renderer wordRenderer;
 
-    
+    public WordManager_2 wordManager; // WordManager_2 の参照
 
     // 初期化（日本語とローマ字のセット）
     public void Initialize(string japaneseWord, string romaji)
@@ -48,7 +48,17 @@ public class WordController_2 : MonoBehaviour
 
         // キーボード入力を処理（ローマ字入力を監視）
         ProcessKeyboardInput();
+
+        if (Input.anyKeyDown) // キーが押されたら
+        {
+            string input = Input.inputString; // 入力された文字を取得
+            if (!string.IsNullOrEmpty(input))
+            {
+                wordManager.UpdateTypedText(input); // WordManager_2 に送る
+            }
+        }
     }
+
 
     // プレイヤー入力を処理
     private void ProcessKeyboardInput()
@@ -88,6 +98,7 @@ public class WordController_2 : MonoBehaviour
         }
         else
         {
+            Debug.Log("リセット");
             // 入力が間違った場合リセット
             currentInput = "";
             wordRenderer.material.color = Color.red; // 赤色で誤入力を表示
@@ -95,26 +106,5 @@ public class WordController_2 : MonoBehaviour
         }
     }
 
-    //void OnCollisionEnter(Collision collision)
-    //{
-
-
-    //    WordController_2 hitWord2 = collision.gameObject.GetComponent<WordController_2>();
-
-    //    if (hitWord2 != null && hitWord2 == romaji)
-    //    {
-    //        Debug.Log($"Target hit: {hitWord2.textDisplay.text}");
-
-    //        // GameManager_2 に接触情報を送信
-    //        GameManager_2 gameManager = FindObjectOfType<GameManager_2>();
-    //        if (gameManager != null)
-    //        {
-    //            gameManager.OnWordHit(hitWord2); // 接触した単語を渡す
-    //        }
-
-    //        // 単語と弾を破壊
-    //        Destroy(hitWord2.gameObject);
-    //        Destroy(gameObject);
-    //    }
-    //}
+    
 }
