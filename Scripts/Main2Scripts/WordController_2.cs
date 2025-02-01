@@ -14,6 +14,7 @@ public class WordController_2 : MonoBehaviour
     private float speed; // 移動速度
                          
     public string character;// 文字を保持するフィールド
+    public int index; //識別番号
 
     private Renderer wordRenderer;
 
@@ -67,6 +68,8 @@ public class WordController_2 : MonoBehaviour
     // プレイヤー入力を処理
     private void ProcessKeyboardInput()
     {
+        if (index != GameManager_2.masterIndex) return; //該当キーワードでない場合は何も起こさない
+       
         // キー入力を監視（ローマ字）
         foreach (char c in "abcdefghijklmnopqrstuvwxyz")
         {
@@ -80,6 +83,8 @@ public class WordController_2 : MonoBehaviour
                     if (typingController != null)
                     {
                         typingController.Shoot(this); // 弾を発射
+
+                        GameManager_2.masterIndex++; //ターゲット番号を1進める　
                     }
                 }
             }
@@ -91,20 +96,22 @@ public class WordController_2 : MonoBehaviour
     {
         if (wordManager == null)
         {
-            Debug.LogError("wordManager が null です！");
+            //Debug.LogError("wordManager が null です！");
             return false;
         }
 
         currentInput += input; // 入力された文字を追加
-        Debug.Log($"現在の入力: {currentInput}"); 
+        //Debug.Log($"現在の入力: {currentInput}"); 
 
-        wordManager.UpdateTypedText(currentInput); //  変更: 1文字ではなく `currentInput` 全体を渡す！
+        //wordManager.UpdateTypedText(currentInput); //  変更: 1文字ではなく `currentInput` 全体を渡す！
 
         if (romajiWord.StartsWith(currentInput))
         {
+            wordManager.UpdateTypedText(currentInput); //UIに入力中の文字を出す
+
             if (romajiWord == currentInput) // 正しく入力完了した場合
             {
-                Debug.Log("入力完了: " + currentInput);
+                //Debug.Log("入力完了: " + currentInput);
                 wordManager.ResetTypedText();
                 currentInput = ""; //  入力リセット！
                 return true;
@@ -113,6 +120,8 @@ public class WordController_2 : MonoBehaviour
         }
         else
         {
+            
+
             Debug.Log("リセット");
             currentInput = ""; // 間違った場合はリセット
             wordManager.ResetTypedText(); //  UI もリセット

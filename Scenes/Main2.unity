@@ -1602,8 +1602,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.31, y: -152.47}
-  m_SizeDelta: {x: 789.37, y: 118.41}
+  m_AnchoredPosition: {x: 0.50378, y: 54.615}
+  m_SizeDelta: {x: 798.99, y: 109.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1148667229
 GameObject:
@@ -2596,6 +2596,7 @@ MonoBehaviour:
   spawnAcceleration: 0.98
   initialWordSpeed: 2
   speedIncreaseRate: 0.1
+  currentIndex: 0
   typedTextUI: {fileID: 950411900}
 --- !u!224 &1634546299
 RectTransform:

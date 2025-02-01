@@ -18,6 +18,7 @@ public class WordManager_2 : MonoBehaviour
 
     private List<GameObject> spawnedWords = new List<GameObject>(); // 生成された単語のリスト
 
+    public int currentIndex; //生成時に付与すべき識別番号を管理
     // 単語とローマ字のセット
     private string[,] wordList = new string[,]
     {
@@ -146,6 +147,11 @@ public class WordManager_2 : MonoBehaviour
 
         // 単語のプレハブを生成
         GameObject newWord = Instantiate(wordPrefab, spawnPosition, Quaternion.identity);
+
+        currentIndex++; //識別番号を発行
+        newWord.GetComponent<WordController_2>().index = currentIndex; //生成したWordに識別番号を付与
+
+
         spawnedWords.Add(newWord); // リストに追加
 
         // WordControllerを使って単語を設定
@@ -181,7 +187,7 @@ public class WordManager_2 : MonoBehaviour
 
         if (typedTextUI != null)
         {
-            typedTextUI.text = typedText; // UIに反映
+            typedTextUI.text = input; // UIに反映
             Debug.Log($"UI 更新: {typedTextUI.text}"); // UI が更新されたか
         }
         else

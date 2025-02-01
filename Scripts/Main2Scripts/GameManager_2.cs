@@ -11,6 +11,8 @@ public class GameManager_2 : MonoBehaviour
     private int currentHP; // 現在のHP
     public int score = 0; // 現在のスコア
 
+    public static int masterIndex = 1; //ターゲット番号
+
     public TextMeshProUGUI hpText; // HP 表示用の Text (UI)
     public TextMeshProUGUI scoreText; // スコア表示用の Text (UI)
     public TextMeshProUGUI gameOverText; // ゲームオーバー表示用
@@ -29,6 +31,8 @@ public class GameManager_2 : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        masterIndex = 1;
+
         audioSource = GetComponent<AudioSource>(); // AudioSource コンポーネントを取得
 
         // 初期設定

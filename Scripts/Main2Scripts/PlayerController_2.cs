@@ -36,6 +36,8 @@ public class PlayerController_2 : MonoBehaviour
 
             // 文字を破壊
             Destroy(collision.gameObject);
+
+            GameManager_2.masterIndex++; //ターゲット番号を1進める
         }
     }
 
