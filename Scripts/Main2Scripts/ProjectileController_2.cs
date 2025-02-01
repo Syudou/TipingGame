@@ -6,7 +6,7 @@ using System;
 public class ProjectileController_2 : MonoBehaviour
 {
 
-    public static event Action<WordController_2, ProjectileController_2> OnProjectileHitWord; // イベント定義
+    //public static event Action<WordController_2, ProjectileController_2> OnProjectileHitWord; // イベント定義
     private WordController_2 target; // ターゲットの文字
     public float speed = 10f; // 弾の移動速度
 

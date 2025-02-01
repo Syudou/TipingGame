@@ -72,7 +72,7 @@ public class GameManager_2 : MonoBehaviour
 
     private void OnEnable()
     {
-        ProjectileController_2.OnProjectileHitWord += HandleProjectileHitWord;
+        //ProjectileController_2.OnProjectileHitWord += HandleProjectileHitWord;
         PlayerController_2.OnPlayerTakeDamage += HandlePlayerTakeDamage;
 
 
@@ -82,7 +82,7 @@ public class GameManager_2 : MonoBehaviour
 
     private void OnDisable()
     {
-        ProjectileController_2.OnProjectileHitWord -= HandleProjectileHitWord;
+        //ProjectileController_2.OnProjectileHitWord -= HandleProjectileHitWord;
         PlayerController_2.OnPlayerTakeDamage -= HandlePlayerTakeDamage;
     }
 

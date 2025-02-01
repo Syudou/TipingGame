@@ -95,10 +95,16 @@ public class WordManager_2 : MonoBehaviour
     {
         spawnInterval = initialSpawnInterval; // 出現間隔を初期化
         wordSpeed = initialWordSpeed; // 移動速度を初期化
+        if (typedTextUI == null)
+        {
+            Debug.LogError("typedTextUI がセットされていません！ Inspector でセットしてください。");
+        }
     }
 
     void Update()
     {
+        Debug.Log($"現在の UI 表示: {typedTextUI.text}");
+
         // ゲームが開始されていない、またはゲームオーバーの場合は動作しない
         GameManager_2 gameManager = FindObjectOfType<GameManager_2>();
         if (!gameManager.IsGameStarted() || gameManager.isGameOver) return;
@@ -169,14 +175,28 @@ public class WordManager_2 : MonoBehaviour
     // プレイヤーの入力を更新し、画面に表示する
     public void UpdateTypedText(string input)
     {
+        Debug.Log($"UpdateTypedText() 呼び出し: {input}"); // どの文字が渡されたか
         typedText += input; // 文字を追加
-        typedTextUI.text = typedText; // UIに反映
+        Debug.Log($"現在の入力: {typedText}");
+
+        if (typedTextUI != null)
+        {
+            typedTextUI.text = typedText; // UIに反映
+            Debug.Log($"UI 更新: {typedTextUI.text}"); // UI が更新されたか
+        }
+        else
+        {
+            Debug.LogError("typedTextUI が null です！ UI の設定を確認してください。");
+        }
     }
 
     // 入力をリセット（単語が確定した時など）
     public void ResetTypedText()
     {
-        typedText = "";
-        typedTextUI.text = "";
+        if (typedTextUI != null)
+        {
+            typedText = "";
+            typedTextUI.text = "";
+        }
     }
 }

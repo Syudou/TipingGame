@@ -18,7 +18,18 @@ public class WordController_2 : MonoBehaviour
     private Renderer wordRenderer;
 
     public WordManager_2 wordManager; // WordManager_2 の参照
-
+    void Start()
+    {
+        wordManager = FindObjectOfType<WordManager_2>();
+        if (wordManager == null)
+        {
+            Debug.LogError("wordManager が見つかりません！ Hierarchy に WordManager_2 があるか確認してください。");
+        }
+        else
+        {
+            Debug.Log("wordManager を正常に取得しました！");
+        }
+    }
     // 初期化（日本語とローマ字のセット）
     public void Initialize(string japaneseWord, string romaji)
     {
@@ -49,14 +60,7 @@ public class WordController_2 : MonoBehaviour
         // キーボード入力を処理（ローマ字入力を監視）
         ProcessKeyboardInput();
 
-        if (Input.anyKeyDown) // キーが押されたら
-        {
-            string input = Input.inputString; // 入力された文字を取得
-            if (!string.IsNullOrEmpty(input))
-            {
-                wordManager.UpdateTypedText(input); // WordManager_2 に送る
-            }
-        }
+        
     }
 
 
@@ -85,13 +89,24 @@ public class WordController_2 : MonoBehaviour
     // ローマ字入力を処理する
     public bool ProcessInput(char input)
     {
+        if (wordManager == null)
+        {
+            Debug.LogError("wordManager が null です！");
+            return false;
+        }
+
         currentInput += input; // 入力された文字を追加
+        Debug.Log($"現在の入力: {currentInput}"); 
+
+        wordManager.UpdateTypedText(currentInput); //  変更: 1文字ではなく `currentInput` 全体を渡す！
 
         if (romajiWord.StartsWith(currentInput))
         {
-            if (romajiWord == currentInput)
+            if (romajiWord == currentInput) // 正しく入力完了した場合
             {
-                // 正しい入力が完了
+                Debug.Log("入力完了: " + currentInput);
+                wordManager.ResetTypedText();
+                currentInput = ""; //  入力リセット！
                 return true;
             }
             return false;
@@ -99,12 +114,12 @@ public class WordController_2 : MonoBehaviour
         else
         {
             Debug.Log("リセット");
-            // 入力が間違った場合リセット
-            currentInput = "";
-            wordRenderer.material.color = Color.red; // 赤色で誤入力を表示
+            currentInput = ""; // 間違った場合はリセット
+            wordManager.ResetTypedText(); //  UI もリセット
+            //wordRenderer.material.color = Color.red;
             return false;
         }
     }
 
-    
+
 }
