@@ -1,53 +1,59 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class FingerIndicatorTutorial : MonoBehaviour
 {
-    public Image leftPinky, leftRing, leftMiddle, leftIndex;
-    public Image rightIndex, rightMiddle, rightRing, rightPinky, thumbs;
+    public SpriteRenderer leftPinky, leftRing, leftMiddle, leftIndex;
+    public SpriteRenderer rightIndex, rightMiddle, rightRing, rightPinky;
 
-    private Dictionary<char, Image> fingerMapping;
+    private Dictionary<char, SpriteRenderer> fingerMapping;
+    private Color defaultColor = Color.white;
+    private Color highlightColor = Color.red;
 
     void Start()
     {
-        fingerMapping = new Dictionary<char, Image>()
+        // キーと指の対応付け（日本のキーボード配列）
+        fingerMapping = new Dictionary<char, SpriteRenderer>()
         {
             // 左小指
-            {'1', leftPinky}, {'Q', leftPinky}, {'A', leftPinky}, {'Z', leftPinky}, {'\t', leftPinky}, {'\n', leftPinky},
-            
+            {'1', leftPinky}, {'q', leftPinky}, {'Q', leftPinky}, {'a', leftPinky}, {'A', leftPinky}, {'z', leftPinky}, {'Z', leftPinky}, {'\t', leftPinky}, {'\n', leftPinky},
+
             // 左薬指
-            {'2', leftRing}, {'W', leftRing}, {'S', leftRing}, {'X', leftRing},
-            
+            {'2', leftRing}, {'w', leftRing}, {'W', leftRing}, {'s', leftRing}, {'S', leftRing}, {'x', leftRing}, {'X', leftRing},
+
             // 左中指
-            {'3', leftMiddle}, {'E', leftMiddle}, {'D', leftMiddle}, {'C', leftMiddle},
-            
+            {'3', leftMiddle}, {'e', leftMiddle}, {'E', leftMiddle}, {'d', leftMiddle}, {'D', leftMiddle}, {'c', leftMiddle}, {'C', leftMiddle},
+
             // 左人差し指
-            {'4', leftIndex}, {'5', leftIndex}, {'R', leftIndex}, {'T', leftIndex}, {'F', leftIndex}, {'G', leftIndex}, {'V', leftIndex}, {'B', leftIndex},
+            {'4', leftIndex}, {'5', leftIndex}, {'r', leftIndex}, {'R', leftIndex}, {'t', leftIndex}, {'T', leftIndex}, {'f', leftIndex}, {'F', leftIndex},
+            {'g', leftIndex}, {'G', leftIndex}, {'v', leftIndex}, {'V', leftIndex}, {'b', leftIndex}, {'B', leftIndex},
 
             // 右人差し指
-            {'6', rightIndex}, {'7', rightIndex}, {'Y', rightIndex}, {'U', rightIndex}, {'H', rightIndex}, {'J', rightIndex}, {'N', rightIndex}, {'M', rightIndex},
+            {'6', rightIndex}, {'7', rightIndex}, {'y', rightIndex}, {'Y', rightIndex}, {'u', rightIndex}, {'U', rightIndex}, {'h', rightIndex}, {'H', rightIndex},
+            {'j', rightIndex}, {'J', rightIndex}, {'n', rightIndex}, {'N', rightIndex}, {'m', rightIndex}, {'M', rightIndex},
 
             // 右中指
-            {'8', rightMiddle}, {'I', rightMiddle}, {'K', rightMiddle}, {',', rightMiddle},
-            
+            {'8', rightMiddle}, {'i', rightMiddle}, {'I', rightMiddle}, {'k', rightMiddle}, {'K', rightMiddle}, {',', rightMiddle},
+
             // 右薬指
-            {'9', rightRing}, {'O', rightRing}, {'L', rightRing}, {'.', rightRing},
-            
+            {'9', rightRing}, {'o', rightRing}, {'O', rightRing}, {'l', rightRing}, {'L', rightRing}, {'.', rightRing},
+
             // 右小指
-            {'0', rightPinky}, {'P', rightPinky}, {'@', rightPinky}, {'-', rightPinky}, {':', rightPinky}, {';', rightPinky}, {'\b', rightPinky}
+            {'0', rightPinky}, {'p', rightPinky}, {'P', rightPinky}, {'@', rightPinky}, {'-', rightPinky}, {':', rightPinky}, {';', rightPinky}, {'\b', rightPinky}
         };
     }
+
 
     public void UpdateFingerDisplay(char key)
     {
         ResetFingerColors();
-        char upperKey = char.ToUpper(key); // 小文字を大文字に変換
 
-        if (fingerMapping.ContainsKey(upperKey))
+
+        if (fingerMapping.ContainsKey(key)) 
         {
-            fingerMapping[upperKey].color = Color.red;  // 対応する指を赤くする
+            fingerMapping[key].color = highlightColor;  // 指を赤くする
         }
     }
 
@@ -55,12 +61,7 @@ public class FingerIndicatorTutorial : MonoBehaviour
     {
         foreach (var finger in fingerMapping.Values)
         {
-            finger.color = Color.white;
+            finger.color = defaultColor;
         }
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

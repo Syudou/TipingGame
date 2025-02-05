@@ -17,6 +17,7 @@ public class GameManager_2 : MonoBehaviour
     public TextMeshProUGUI scoreText; // スコア表示用の Text (UI)
     public TextMeshProUGUI gameOverText; // ゲームオーバー表示用
     public TextMeshProUGUI readyText; // 準備完了のテキスト
+    public TextMeshProUGUI TypedText;
 
     public GameObject retryButton; // リトライボタン
     public GameObject titleButton; // タイトルボタン
@@ -46,6 +47,7 @@ public class GameManager_2 : MonoBehaviour
         retryButton.SetActive(false);
         titleButton.SetActive(false);
         readyText.gameObject.SetActive(true); // 準備完了テキスト表示
+        TypedText.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -149,6 +151,7 @@ public class GameManager_2 : MonoBehaviour
     // ゲームオーバー時の処理
     public void GameOver()
     {
+
         isGameOver = true;
         Debug.Log("Game Over!");
 
@@ -173,6 +176,8 @@ public class GameManager_2 : MonoBehaviour
 
         // ゲームオーバー時にSEを再生
         audioManager.PlayGameOverSE();
+
+        TypedText.gameObject.SetActive(false); //タイピングは消す
     }
 
     public bool IsGameStarted()

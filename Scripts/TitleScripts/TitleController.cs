@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class TitleController : MonoBehaviour
 {
+    public void TutorialScene()
+    {
+        SceneManager.LoadScene("Tutorial"); // Main シーンをロード
+    }
     // 「大文字・小文字編」ボタン
     public void LoadUpperLowerCaseScene()
     {

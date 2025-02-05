@@ -5,31 +5,43 @@ using TMPro;
 
 public class VirtualKeyboardTutorial : MonoBehaviour
 {
-    public Dictionary<char, Button> keyButtons = new Dictionary<char, Button>();
+    public Dictionary<char, SpriteRenderer> keyMapping;
+    public Color defaultColor = Color.white;
+    public Color highlightColor = Color.yellow;
 
     void Start()
     {
-        foreach (Button button in GetComponentsInChildren<Button>())
+        keyMapping = new Dictionary<char, SpriteRenderer>();
+
+        foreach (SpriteRenderer key in GetComponentsInChildren<SpriteRenderer>())
         {
-            char key = button.GetComponentInChildren<TextMeshProUGUI>().text[0];
-            keyButtons[key] = button;
+            char keyChar = char.ToLower(key.gameObject.name[0]); //  小文字で統一して登録
+
+            if (!keyMapping.ContainsKey(keyChar))
+            {
+                keyMapping.Add(keyChar, key);
+            }
         }
     }
 
+    //  タイピング対象の文字に応じてキーを光らせる
     public void HighlightKey(char key)
     {
-        DisableAllKeys();
-        if (keyButtons.ContainsKey(key))
+        ResetKeyColors();
+
+        char lowerKey = char.ToLower(key);
+
+        if (keyMapping.ContainsKey(lowerKey))
         {
-            keyButtons[key].image.color = Color.yellow;
+            keyMapping[lowerKey].color = highlightColor;
         }
     }
 
-    public void DisableAllKeys()
+    public void ResetKeyColors()
     {
-        foreach (var button in keyButtons.Values)
+        foreach (var key in keyMapping.Values)
         {
-            button.image.color = Color.white;
+            key.color = defaultColor;
         }
     }
 }

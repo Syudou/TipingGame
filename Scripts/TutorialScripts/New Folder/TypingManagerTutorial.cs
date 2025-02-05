@@ -9,6 +9,7 @@ public class TypingManagerTutorial : MonoBehaviour
     public TextMeshProUGUI targetLetterText;  // 目標の文字
     public VirtualKeyboardTutorial virtualKeyboard;  // 仮想キーボードの参照
     public FingerIndicatorTutorial fingerIndicator;  // 指の表示スクリプト
+    public GameManagerTutorial GameManager;
 
     private float timeRemaining = 60f;
     private char currentLetter;
@@ -28,7 +29,7 @@ public class TypingManagerTutorial : MonoBehaviour
             yield return null;
         }
 
-        GameOver();
+        GameManager.GameOver();
     }
 
     void GenerateRandomLetter()
@@ -56,10 +57,10 @@ public class TypingManagerTutorial : MonoBehaviour
         }
     }
 
-    void GameOver()
-    {
-        countdownText.text = "Game Over!";
-        targetLetterText.text = "";
-        virtualKeyboard.DisableAllKeys();
-    }
+    //void GameOver()
+    //{
+    //    countdownText.text = "Game Over!";
+    //    targetLetterText.text = "";
+    //    virtualKeyboard.ResetKeyColors();
+    //}
 }

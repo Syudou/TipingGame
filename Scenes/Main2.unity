@@ -2848,6 +2848,7 @@ MonoBehaviour:
   scoreText: {fileID: 1344304988}
   gameOverText: {fileID: 103655661}
   readyText: {fileID: 782721525}
+  TypedText: {fileID: 950411900}
   retryButton: {fileID: 154156753}
   titleButton: {fileID: 855413984}
   audioManager: {fileID: 1282894784}
