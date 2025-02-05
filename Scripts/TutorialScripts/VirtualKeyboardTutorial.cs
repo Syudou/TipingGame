@@ -5,15 +5,15 @@ using TMPro;
 
 public class VirtualKeyboardTutorial : MonoBehaviour
 {
-    public Dictionary<char, SpriteRenderer> keyMapping;
+    public Dictionary<char, Image> keyMapping;
     public Color defaultColor = Color.white;
     public Color highlightColor = Color.yellow;
 
     void Start()
     {
-        keyMapping = new Dictionary<char, SpriteRenderer>();
+        keyMapping = new Dictionary<char, Image>();
 
-        foreach (SpriteRenderer key in GetComponentsInChildren<SpriteRenderer>())
+        foreach (Image key in GetComponentsInChildren<Image>())
         {
             char keyChar = char.ToLower(key.gameObject.name[0]); //  è¨ï∂éöÇ≈ìùàÍÇµÇƒìoò^
 

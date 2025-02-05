@@ -96,6 +96,7 @@ public class GameManagerTutorial : MonoBehaviour
         currentLetter = letters[Random.Range(0, letters.Length)];
         targetLetterText.text = currentLetter.ToString();
 
+        virtualKeyboard.ResetKeyColors();
         virtualKeyboard.HighlightKey(currentLetter);
         fingerIndicator.UpdateFingerDisplay(currentLetter);
     }
@@ -110,6 +111,8 @@ public class GameManagerTutorial : MonoBehaviour
                 {
                     score++;  // スコア加算
                     scoreText.text = "Score: " + score;  // スコア表示更新
+
+                    virtualKeyboard.ResetKeyColors();
                     GenerateRandomLetter();
                     break;
                 }
